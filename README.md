@@ -1,8 +1,10 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+## BakeMate
 
-Welcome,
+BakeMate is your culinary assistant, seamlessly connecting to a recipe API with ease to deliver a customised experience.
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **March 14, 2023**
+It facilitates ingredient substitution, allowing you to easily change quantities to match what you have available. 
+
+For instance, if a recipe calls for 250g of an ingredient but you have 100g on hand, BakeMate guides you through the perfect ingredient adjustment for your baking projects.
 
 ## Reminders
 
