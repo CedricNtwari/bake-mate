@@ -1,7 +1,6 @@
 import requests
 import pprint
-
-API_KEY = 'dd6079b14eee42dba13099a4eeff6317'
+from config import API_KEY
 
 
 def get_cake_recipes(api_key, query='cake'):
