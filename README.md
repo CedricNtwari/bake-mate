@@ -2,9 +2,28 @@
 
 BakeMate is your culinary assistant, seamlessly connecting to a recipe API with ease to deliver a customised experience.
 
-It facilitates ingredient substitution, allowing you to easily change quantities to match what you have available. 
+It leverages the Flask web framework to provide a smooth user interface for exploring and managing recipes. Additionally, the application utilizes the Ninja template engine for rendering dynamic content.
 
+### Inspiration
+
+Inspired by a personal challenge, this app is a testament to the everyday struggle of home bakers. The idea came from my wife, who often had to rely on a little bit of speculation. Many recipes describe ingredients in a way that doesn’t always align with what she had in her cupboard. 
+
+BakeMate was born out of a desire to simplify this process, offering a solution for ingredient adjustments with precision.
+
+### Functionality
+
+It facilitates ingredient substitution, allowing you to easily change quantities to match what you have available. 
 For instance, if a recipe calls for 250g of an ingredient but you have 100g on hand, BakeMate guides you through the perfect ingredient adjustment for your baking projects.
+
+### Credits
+
+- **Spoonacular API**: Acknowledgment to Spoonacular API (https://spoonacular.com/food-api) for their comprehensive food-related API that enhances the recipe retrieval and exploration experience in BakeMate.
+
+
+### Acknowledgements
+
+- I would like to express my gratitude to my mentor,Adegbenga Adeye, the Code Institute, and everyone who has supported me on my journey to becoming a full-stack software developer. The warmth and encouragement I've received have been truly wonderful. Thank you!
+
 
 ## Reminders
 
