@@ -18,7 +18,8 @@ def search_cake_recipes(api_key, query='cake'):
     }
 
     try:
-        response = requests.get(FOOD2FORK_API_URL, params=params, headers=headers)
+        response = requests.get(
+            FOOD2FORK_API_URL, params=params, headers=headers)
 
         if response.status_code == 200:
             recipes_data = response.json()
@@ -31,7 +32,8 @@ def search_cake_recipes(api_key, query='cake'):
             recipes = recipes_data.get('results', [])
             return recipes
         else:
-            print(f"Error {response.status_code}: Unable to fetch recipes. {response.content}")
+            print(
+                f"Error {response.status_code}: Unable to fetch recipes. {response.content}")
             return None
 
     except Exception as e:
