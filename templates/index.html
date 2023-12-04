@@ -2,16 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipe List</title>
+    <title>Cake Recipes</title>
 </head>
 <body>
-    <h1>Recipe List</h1>
+    <h1>Cake Recipes</h1>
     <ul>
         {% for recipe in recipes %}
             <li>
-                <img src="{{ recipe['image'] }}" alt="{{ recipe['title'] }} Image" width="100">
-                <a href="{{ url_for('recipe', recipe_id=recipe['id']) }}">{{ recipe['title'] }}</a>
+                <h2>{{ recipe['title'] }}</h2>
+                <p>Publisher: {{ recipe['publisher'] }}</p>
+                {% if recipe['image'] %}
+                    <img src="{{ recipe['image'] }}" alt="{{ recipe['title'] }}">
+                {% endif %}
+                <p>Source URL: <a href="{{ recipe['source_url'] }}" target="_blank">{{ recipe['source_url'] }}</a></p>
+                <p>Ingredients:</p>
+                <ul>
+                    {% for ingredient in recipe['ingredients'] %}
+                        <li>{{ ingredient }}</li>
+                    {% endfor %}
+                </ul>
             </li>
         {% endfor %}
     </ul>
