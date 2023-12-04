@@ -17,7 +17,7 @@ For instance, if a recipe calls for 250g of an ingredient but you have 100g on h
 
 ### Credits
 
-- **Spoonacular API**: Acknowledgment to Spoonacular API (https://spoonacular.com/food-api) for their comprehensive food-related API that enhances the recipe retrieval and exploration experience in BakeMate.
+- **Food2fork API**: Acknowledgment to Food2fork API (https://food2fork.ca/#Search-Recipes) for their comprehensive food-related API that enhances the recipe retrieval and exploration experience in BakeMate.
 
 
 ### Acknowledgements
