@@ -8,35 +8,58 @@ FOOD2FORK_API_URL = 'https://food2fork.ca/api/recipe/search/'
 
 
 def search_cake_recipes(api_key, query='cake', page=1):
+    """
+    Search for cake recipes using the food2fork.ca API.
+
+    Parameters:
+    - api_key (str): The food2fork.ca API key.
+    - query (str): The query term for recipe search (default is 'cake').
+    - page (int): The page number for pagination (default is 1).
+
+    Returns:
+    - list or None: A list of dictionaries representing the recipes,
+    or None if the request fails.
+    """
+    # Define parameters for the API request
     params = {
         'page': page,
         'query': query,
     }
-
+    # Define headers for the API request
     headers = {
         'Authorization': f'Token {api_key}',
     }
-
+    # Make a GET request to the Food2Fork API
     try:
         response = requests.get(
-            FOOD2FORK_API_URL, params=params, headers=headers)
+            FOOD2FORK_API_URL,  # API endpoint URL
+            params=params,  # Pass the parameters
+            headers=headers  # Pass the headers
 
+        )
+
+        # Check if the response status code is 200 (OK)
         if response.status_code == 200:
+            # Parse the JSON data from the response
             recipes_data = response.json()
 
+            # Check if the API response contains an error
             if 'error' in recipes_data:
                 error_message = recipes_data['error']
                 print(f"Error in API response: {error_message}")
                 return None
 
+            # Extract the list of recipes from the response data
             recipes = recipes_data.get('results', [])
             return recipes
         else:
+            # Print an error message if the API request was not successful
             print(
                 f"Error {response.status_code}: "
                 f"Unable to fetch recipes. {response.content}")
             return None
 
+    # Handle exceptions
     except Exception as e:
         print(f"An error occurred: {e}")
         return None
