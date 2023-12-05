@@ -67,11 +67,23 @@ def search_cake_recipes(api_key, query='cake', page=1):
 
 @app.route('/')
 def index():
+    """
+    Route to display a list of cake recipes on the index page.
+    Returns:
+    - Renders the 'index.html' template
+    with the fetched recipes, or displays an error message
+    if fetching recipes fails.
+    """
+    # Call the function to search for cake recipes using the Food2Fork API
     cake_recipes = search_cake_recipes(API_KEY)
     # Set a default value for 'page' if it is None
     page = 1
+
+    # Check if cake recipes were successfully retrieve
     if cake_recipes:
+        # Determine if there are more recipes by checking the length of the list
         has_more_recipes = len(cake_recipes) > 0
+        # Render the 'index.html' template with recipe data and pagination information
         return render_template(
             'index.html',
             recipes=cake_recipes,
@@ -79,6 +91,7 @@ def index():
             has_more_recipes=has_more_recipes
         )
     else:
+        # Return an error message if fetching recipes fails
         return "Error fetching recipes."
 
 
