@@ -81,9 +81,11 @@ def index():
 
     # Check if cake recipes were successfully retrieve
     if cake_recipes:
-        # Determine if there are more recipes by checking the length of the list
+        # Determine if there are more recipes by checking
+        # the length of the list
         has_more_recipes = len(cake_recipes) > 0
-        # Render the 'index.html' template with recipe data and pagination information
+        # Render the 'index.html' template with recipe data
+        # and pagination information
         return render_template(
             'index.html',
             recipes=cake_recipes,
