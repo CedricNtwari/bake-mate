@@ -7,9 +7,9 @@ app = Flask(__name__)
 FOOD2FORK_API_URL = 'https://food2fork.ca/api/recipe/search/'
 
 
-def search_cake_recipes(api_key, query='cake'):
+def search_cake_recipes(api_key, query='cake', page=1):
     params = {
-        'page': 1,
+        'page': page,
         'query': query,
     }
 
@@ -48,9 +48,28 @@ def index():
     # Set a default value for 'page' if it is None
     page = 1
     if cake_recipes:
-        return render_template('index.html', recipes=cake_recipes, page=page)
+        has_more_recipes = len(cake_recipes) > 0
+        return render_template(
+            'index.html',
+            recipes=cake_recipes,
+            page=page,
+            has_more_recipes=has_more_recipes
+        )
     else:
         return "Error fetching recipes."
+
+
+# Route to handle loading more recipes
+@app.route('/load-more', methods=['GET'])
+def load_more():
+    # Get the 'page' parameter from the form submission
+    page = int(request.args.get('page', 1))
+    cake_recipes = search_cake_recipes(API_KEY, page=page)
+
+    if cake_recipes:
+        return render_template('index.html', recipes=cake_recipes, page=page)
+    else:
+        return "Error fetching more recipes."
 
 
 if __name__ == '__main__':
