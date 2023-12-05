@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from config import API_KEY
 import requests
 
@@ -33,7 +33,8 @@ def search_cake_recipes(api_key, query='cake'):
             return recipes
         else:
             print(
-                f"Error {response.status_code}: Unable to fetch recipes. {response.content}")
+                f"Error {response.status_code}: "
+                f"Unable to fetch recipes. {response.content}")
             return None
 
     except Exception as e:
@@ -44,9 +45,10 @@ def search_cake_recipes(api_key, query='cake'):
 @app.route('/')
 def index():
     cake_recipes = search_cake_recipes(API_KEY)
-
+    # Set a default value for 'page' if it is None
+    page = 1
     if cake_recipes:
-        return render_template('index.html', recipes=cake_recipes)
+        return render_template('index.html', recipes=cake_recipes, page=page)
     else:
         return "Error fetching recipes."
 
