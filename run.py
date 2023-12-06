@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from config import API_KEY
 import requests
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 
 FOOD2FORK_API_URL = 'https://food2fork.ca/api/recipe/search/'
 
