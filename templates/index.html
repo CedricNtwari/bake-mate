@@ -54,7 +54,7 @@
     <form method="GET" action="/load-more">
         <input type="hidden" name="page" value="{{ page + 1 }}">
         <button type="submit" {% if not has_more_recipes %}disabled{% endif %}>
-            Load More Recipes
+            Load More Recipes (Page {{ page + 1 }})
         </button>
     </form>
     <button class="scroll-up-btn" onclick="scrollToTop()">↑</button>
