@@ -4,10 +4,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Meta tags for search engine optimization -->
+    <meta name="description"
+    content="BakeMate is your culinary assistant, seamlessly connecting to a recipe API with ease to deliver a customised experience. It leverages the Flask web framework to provide a smooth user interface for exploring and managing recipes.">
+
+    <meta name="keywords"
+    content="BakeMate, culinary assistant, recipe management, baking, home baking, ingredient adjustment, precision baking, baking projects">
+
+    <!-- Favicon & Tab Icon Links -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon_io/apple-touch-icon.png') }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon_io/favicon-32x32.png') }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon_io/favicon-16x16.png') }}">
+
+
+    <!-- Link CSS Stylesheets -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+
     <title>Cake Recipes</title>
 </head>
 <body>
+    <header>
     <h1>Cake Recipes</h1>
+    </header>
+    <main>
+    <!-- Display current page and add a button to return to the previous page -->
+    {% if page > 1 %}
+        <p>Page {{ page }} <a href="/load-more?page={{ page - 1 }}">(Previous Page)</a></p>
+    {% endif %}
     <ul>
         {% for recipe in recipes %}
             <li>
@@ -33,12 +57,38 @@
             Load More Recipes
         </button>
     </form>
+    <button class="scroll-up-btn" onclick="scrollToTop()">↑</button>
+    <main>
+    <footer>
+        <p>Follow us on</p>
+         <ul id="social-network">
+            <li>
+                <a href="https://www.facebook.com/" target="_blank" rel="noopener"
+                    aria-label="Visit our Facebook (opens in new tab)"><i class="fab fa-facebook"></i></a>
+            </li>
+            <li>
+                <a href="https://twitter.com/" target="_blank" rel="noopener"
+                    aria-label="Visit our Twitter (opens in new tab)"><i class="fab fa-twitter-square"></i></a>
+            </li>
+            <li>
+                <a href="https://www.youtube.com/" target="_blank" rel="noopener"
+                    aria-label="Visit our Youtube (opens in new tab)"><i class="fab fa-youtube-square"></i></a>
+            </li>
+            <li>
+                <a href="https://www.instagram.com/" target="_blank" rel="noopener"
+                    aria-label="Visit our Instagram (opens in new tab)"><i class="fab fa-instagram"></i></a>
+                </li>
+        </ul>
+        <div class="contact-information">
+            <p><i class="fas fa-phone"></i> +356 2124 9200</p>
+            <p><i class="far fa-envelope"></i> ntwaricedric@gmail.com</p>
+        </div>
+        <p id="author">Built and designed by Jean Cédric Ntwari</p>
+    </footer>
+     <!-- Link JavaScript file -->
+     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
-    {% if not has_more_recipes %}
-    <div class="alert">
-        No more recipes available.
-    </div>
-{% endif %}
-
+     <!-- Font awesome kit -->
+     <script src="https://kit.fontawesome.com/c0241e8eb0.js" crossorigin="anonymous"></script>
 </body>
 </html>
