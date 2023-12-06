@@ -1,0 +1,50 @@
+/* Asterisk selector to override default styles added by the browser */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Add smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Google fonts import */
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+
+/* General Styles */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Tajawal', sans-serif;
+    /* Generic project styles */
+    color: var(--primary-color);
+}
+
+
+/* Main Content */
+main {
+    background-color: white;
+    /* Make main element take up any surplus space to push footer down */
+    flex: 1 0 auto;
+    padding: 1rem;
+}
+.scroll-up-btn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+footer {
+    background-color: lightgray
+}
