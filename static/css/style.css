@@ -45,6 +45,61 @@ main {
     font-size: 20px;
 }
 
+/* Add styles for recipe cards */
+.recipe-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.recipe-details {
+    padding: 15px;
+}
+
+.recipe-image img {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ccc;
+}
+
+.load-more-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 footer {
     background-color: lightgray
 }
+
+/* Media query: large and landscape phones (576px and up) */
+@media screen and (min-width: 576px) {}
+
+/* Media query: tablets and larger (768px and up) */
+@media screen and (min-width: 768px) {
+    .recipe-container{
+        display: flex;
+        width: fit-content;
+    flex-wrap: wrap;
+    }
+    .recipe-card {
+        width: calc(33.33% - 20px); /* width for three-column layout */
+    }
+}
+
+/* Media query: laptop and larger (992px and up) */
+@media screen and (min-width: 992px) {}
+
+/* Media query: desktop and larger (1200px and up) */
+@media screen and (min-width: 1200px) {
+    .recipe-card {
+        width: calc(25% - 20px); /* width for a four-column layout */
+    }
+}
+
+/* Media query: larger (1400px and up) */
+@media screen and (min-width: 1400px) {}
