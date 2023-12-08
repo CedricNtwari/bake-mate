@@ -35,11 +35,9 @@
     <ul>
         {% for recipe in recipes %}
             <li>
+                <img src="{{ recipe['featured_image'] }}" alt="{{ recipe['title'] }}">
                 <h2>{{ recipe['title'] }}</h2>
                 <p>Publisher: {{ recipe['publisher'] }}</p>
-                {% if recipe['image'] %}
-                    <img src="{{ recipe['image'] }}" alt="{{ recipe['title'] }}">
-                {% endif %}
                 <p>Source URL: <a href="{{ recipe['source_url'] }}" target="_blank">{{ recipe['source_url'] }}</a></p>
                 <p>Ingredients:</p>
                 <ul>
