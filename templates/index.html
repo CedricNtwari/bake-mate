@@ -36,18 +36,18 @@
         {% for recipe in recipes %}
             <li class="recipe-card">
                 <div class="recipe-details">
-                <div class="recipe-image">
-                <img src="{{ recipe['featured_image'] }}" alt="{{ recipe['title'] }}">
-                </div>
-                <h2>{{ recipe['title'] }}</h2>
-                <p>Publisher: {{ recipe['publisher'] }}</p>
-                <p>Source URL: <a href="{{ recipe['source_url'] }}" target="_blank">{{ recipe['source_url'] }}</a></p>
-                <p>Ingredients:</p>
-                <ul>
+                    <div class="recipe-image">
+                        <img src="{{ recipe['featured_image'] }}" alt="{{ recipe['title'] }}">
+                    </div>
+                    <h2>{{ recipe['title'] }}</h2>
+                    <p>Publisher: {{ recipe['publisher'] }}</p>
+                    <p>Source URL: <a href="{{ recipe['source_url'] }}" target="_blank">{{ recipe['source_url'] }}</a></p>
+                    <p>Ingredients:</p>
+                    <ul>
                     {% for ingredient in recipe['ingredients'] %}
                         <li>{{ ingredient }}</li>
                     {% endfor %}
-                </ul>
+                    </ul>
                 </div>
             </li>
         {% endfor %}
