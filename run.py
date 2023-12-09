@@ -97,6 +97,21 @@ def index():
         return "Error fetching recipes."
 
 
+@app.route('/ingredient/<pk>')
+def show_ingredients(pk):
+    # Use the API response data directly
+    recipes = search_cake_recipes(API_KEY)  # Adjust as needed
+    ingredients = None
+
+    # Find the recipe with the specified 'pk'
+    for recipe in recipes:
+        if str(recipe['pk']) == pk:
+            ingredients = recipe.get('ingredients', [])
+            break
+
+    return render_template('ingredient.html', ingredients=ingredients)
+
+
 # Route to handle loading more recipes
 @app.route('/load-more', methods=['GET'])
 def load_more():

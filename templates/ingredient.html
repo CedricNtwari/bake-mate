@@ -27,37 +27,16 @@
     <header>
     </header>
     <main>
-    <h1>Cake Recipes</h1>
-    <!-- Display current page and add a button to return to the previous page -->
-    {% if page > 1 %}
-        <p>Page {{ page }} <a href="/load-more?page={{ page - 1 }}">(Previous Page)</a></p>
-    {% endif %}
-    <ul class="recipe-container">
-        {% for recipe in recipes %}
-            <li class="recipe-card">
-                <div class="recipe-details">
-                    <div class="recipe-image">
-                        <img src="{{ recipe['featured_image'] }}" alt="{{ recipe['title'] }}">
-                    </div>
-                    <h2>{{ recipe['title'] }}</h2>
-                    <p>Publisher: {{ recipe['publisher'] }}</p>
-                    <p>Source URL: <a href="{{ recipe['source_url'] }}" target="_blank">{{ recipe['source_url'] }}</a></p>
-                    <p>Ingredients:</p>
-                    <!-- Add a button to redirect to the ingredient.html page -->
-                    <a href="/ingredient/{{ recipe['pk'] }}" class="ingredient-btn">View Ingredients</a>
-                </div>
-            </li>
-        {% endfor %}
-    </ul>
-    <!-- Add a button to load more recipes -->
-    <form method="GET" action="/load-more">
-        <input type="hidden" name="page" value="{{ page + 1 }}">
-        <button class="load-more-btn" type="submit" {% if not has_more_recipes %}disabled{% endif %}>
-            Load More Recipes (Page {{ page + 1 }})
-        </button>
-    </form>
-    <button class="scroll-up-btn" onclick="scrollToTop()">↑</button>
-</main>
+        <h1>Ingredients:</h1>
+        <ul>
+            {% for ingredient in ingredients %}
+                <li>{{ ingredient }}</li>
+            {% endfor %}
+        </ul>
+        <!-- Add a button to go back to the main recipe page -->
+        <a href="/" class="back-btn">Back to Recipes</a>
+        <button class="scroll-up-btn" onclick="scrollToTop()">↑</button>
+    </main>
     <footer>
         <p>Follow us on</p>
          <ul id="social-network">
