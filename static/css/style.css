@@ -84,11 +84,17 @@ footer {
     .recipe-container{
         display: flex;
         width: fit-content;
-    flex-wrap: wrap;
+        flex-wrap: wrap;
     }
     .recipe-card {
         width: calc(33.33% - 20px); /* width for three-column layout */
         margin: 5px;
+        transition: transform 0.3s ease-in-out;
+        cursor: pointer;
+    }
+
+    .recipe-card:hover {
+        transform: scale(1.02);
     }
 }
 
