@@ -130,10 +130,13 @@ def load_more():
 def page_not_found(e):
     return render_template('error_404.html'), 404
 
+
 # General error handler for other HTTP error codes
 @app.errorhandler(500)
 def internal_server_error(e):
     return "Internal Server Error", 500
 
+
+# Run the Flask application in debug mode
 if __name__ == '__main__':
     app.run(debug=True)
