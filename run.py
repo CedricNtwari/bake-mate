@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from config import API_KEY
+import os
 import requests
 
 app = Flask(__name__, static_url_path='/static')
@@ -27,7 +27,7 @@ def search_cake_recipes(api_key, query='cake', page=1):
     }
     # Define headers for the API request
     headers = {
-        'Authorization': f'Token {api_key}',
+        'Authorization': f'Token {os.environ.get("API_KEY")}',
     }
     # Make a GET request to the Food2Fork API
     try:
