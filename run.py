@@ -1,10 +1,18 @@
 from flask import Flask, render_template, request
-from config import API_KEY
+# Package to load environment variables from a .env file
+# (https://pypi.org/project/python-dotenv/)
+from dotenv import load_dotenv
+import os
 import requests
+
+load_dotenv()  # take environment variables from .env.
 
 app = Flask(__name__, static_url_path='/static')
 
 FOOD2FORK_API_URL = 'https://food2fork.ca/api/recipe/search/'
+
+# Retrieve API key from environment variable
+api_key = os.environ.get("API_KEY")
 
 
 def search_cake_recipes(api_key, query='cake', page=1):
@@ -75,7 +83,7 @@ def index():
     if fetching recipes fails.
     """
     # Call the function to search for cake recipes using the Food2Fork API
-    cake_recipes = search_cake_recipes(API_KEY)
+    cake_recipes = search_cake_recipes(api_key)
     # Set a default value for 'page' if it is None
     page = 1
 
@@ -100,7 +108,7 @@ def index():
 @app.route('/ingredient/<pk>')
 def show_ingredients(pk):
     # Use the API response data directly
-    recipes = search_cake_recipes(API_KEY)  # Adjust as needed
+    recipes = search_cake_recipes(api_key)  # Adjust as needed
     ingredients = None
 
     # Find the recipe with the specified 'pk'
@@ -117,7 +125,7 @@ def show_ingredients(pk):
 def load_more():
     # Get the 'page' parameter from the form submission
     page = int(request.args.get('page', 1))
-    cake_recipes = search_cake_recipes(API_KEY, page=page)
+    cake_recipes = search_cake_recipes(api_key, page=page)
 
     if cake_recipes:
         return render_template('index.html', recipes=cake_recipes, page=page)
