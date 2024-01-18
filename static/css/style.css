@@ -63,6 +63,14 @@ main {
     border-bottom: 1px solid #ccc;
 }
 
+.edit-panel {
+    display: none;
+}
+
+.show-edit-panel {
+    display: block;
+}
+
 .load-more-btn {
     background-color: #4CAF50;
     color: white;

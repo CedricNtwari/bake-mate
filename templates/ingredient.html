@@ -30,10 +30,16 @@
         <h1>Ingredients:</h1>
         <ul>
             {% for ingredient in ingredients %}
-                <li>{{ ingredient }}</li>
+            <li class="ingredient-item">
+                <span class="ingredient-quantity-name">{{ ingredient }}</span>
+                <button class="edit-btn"><i class="fas fa-edit"></i></button>
+                <div class="edit-panel">
+                    <input type="number" class="edit-input" step="0.1" placeholder="Enter new quantity">
+                    <button class="update-btn">Update</button>
+                </div>
+            </li>
             {% endfor %}
         </ul>
-        <!-- Add a button to go back to the main recipe page -->
         <a href="/" class="back-btn">Back to Recipes</a>
         <button class="scroll-up-btn" onclick="scrollToTop()">↑</button>
     </main>
