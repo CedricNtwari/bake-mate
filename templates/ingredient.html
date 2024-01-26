@@ -30,7 +30,7 @@
         <h1>Ingredients:</h1>
         <ul>
             {% for ingredient in ingredients %}
-            <li class="ingredient-item">
+            <li class="ingredient-item" data-ingredient-id="{{ loop.index0 }}">
                 <span class="ingredient-quantity-name">{{ ingredient }}</span>
                 <button class="edit-btn"><i class="fas fa-edit"></i></button>
                 <div class="edit-panel">
@@ -43,7 +43,7 @@
         <button class="update-all-btn">Update All</button>
         <a href="/" class="back-btn">Back to Recipes</a>
         <button class="scroll-up-btn" onclick="scrollToTop()">↑</button>
-    </main>    
+    </main>
     <footer>
         <p>Follow us on</p>
          <ul id="social-network">
