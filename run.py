@@ -25,7 +25,7 @@ def search_cake_recipes(api_key, query='cake', page=1):
     - page (int): The page number for pagination (default is 1).
 
     Returns:
-    - list or None: A list of dictionaries representing the recipes,
+    - tuple or None: A tuple containing a list of dictionaries representing the recipes and the total number of recipes,
     or None if the request fails.
     """
     # Define parameters for the API request
@@ -43,7 +43,6 @@ def search_cake_recipes(api_key, query='cake', page=1):
             FOOD2FORK_API_URL,  # API endpoint URL
             params=params,  # Pass the parameters
             headers=headers  # Pass the headers
-
         )
 
         # Check if the response status code is 200 (OK)
@@ -59,7 +58,9 @@ def search_cake_recipes(api_key, query='cake', page=1):
 
             # Extract the list of recipes from the response data
             recipes = recipes_data.get('results', [])
-            return recipes
+            total_recipes = recipes_data.get('count', 0)
+            
+            return recipes, total_recipes
         else:
             # Print an error message if the API request was not successful
             print(
@@ -73,6 +74,7 @@ def search_cake_recipes(api_key, query='cake', page=1):
         return None
 
 
+
 @app.route('/')
 def index():
     """
@@ -83,11 +85,11 @@ def index():
     if fetching recipes fails.
     """
     # Call the function to search for cake recipes using the Food2Fork API
-    cake_recipes = search_cake_recipes(api_key)
+    cake_recipes, total_recipes = search_cake_recipes(api_key)
     # Set a default value for 'page' if it is None
     page = 1
 
-    # Check if cake recipes were successfully retrieve
+    # Check if cake recipes were successfully retrieved
     if cake_recipes:
         # Determine if there are more recipes by checking
         # the length of the list
@@ -98,11 +100,13 @@ def index():
             'index.html',
             recipes=cake_recipes,
             page=page,
-            has_more_recipes=has_more_recipes
+            has_more_recipes=has_more_recipes,
+            total_recipes=total_recipes
         )
     else:
         # Return an error message if fetching recipes fails
         return "Error fetching recipes."
+
 
 
 @app.route('/ingredient/<pk>')

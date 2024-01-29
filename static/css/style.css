@@ -25,6 +25,18 @@ body {
 
 
 /* Main Content */
+header {
+    background-color: #d8456b;
+    color: #fff;
+    height: 100px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
 main {
     background-color: white;
     /* Make main element take up any surplus space to push footer down */

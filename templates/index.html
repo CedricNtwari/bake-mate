@@ -25,9 +25,11 @@
 </head>
 <body>
     <header>
+        <h1 id="logo">BakeMate</h1><br>
+        <p>You can make {{ total_recipes }} recipes</p>
     </header>
     <main>
-    <h1>Cake Recipes</h1>
+    <h1>{{ total_recipes }} Cake Recipes</h1>
     <!-- Display current page and add a button to return to the previous page -->
     {% if page > 1 %}
         <p>Page {{ page }} <a href="/load-more?page={{ page - 1 }}">(Previous Page)</a></p>
