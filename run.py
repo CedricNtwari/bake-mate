@@ -112,12 +112,12 @@ def index():
 @app.route('/ingredient/<pk>')
 def show_ingredients(pk):
     # Use the API response data directly
-    recipes = search_cake_recipes(api_key)  # Adjust as needed
+    recipes, _ = search_cake_recipes(api_key)  # Adjust as needed
     ingredients = None
 
     # Find the recipe with the specified 'pk'
     for recipe in recipes:
-        if str(recipe['pk']) == pk:
+        if str(recipe.get('pk')) == pk:
             ingredients = recipe.get('ingredients', [])
             break
 
