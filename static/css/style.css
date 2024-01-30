@@ -41,6 +41,8 @@ main {
     /* Make main element take up any surplus space to push footer down */
     flex: 1 0 auto;
     padding: 1rem;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
 }
 
 .header-text {

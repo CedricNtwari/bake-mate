@@ -10,12 +10,15 @@ window.onscroll = function() {
 
 function showScrollUpButton() {
     var scrollUpButton = document.querySelector('.scroll-up-btn');
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        scrollUpButton.style.display = 'block';
-    } else {
-        scrollUpButton.style.display = 'none';
+    if (scrollUpButton) {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            scrollUpButton.style.display = 'block';
+        } else {
+            scrollUpButton.style.display = 'none';
+        }
     }
 }
+
 
 document.addEventListener('DOMContentLoaded', function () {
     const editedIngredientIds = []; // List to store edited ingredient IDs
