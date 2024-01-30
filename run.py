@@ -112,7 +112,7 @@ def index():
 @app.route('/ingredient/<pk>')
 def show_ingredients(pk):
     # Use the API response data directly
-    recipes, _ = search_cake_recipes(api_key)  # Adjust as needed
+    recipes, total_recipes = search_cake_recipes(api_key)
     ingredients = None
 
     # Find the recipe with the specified 'pk'
@@ -121,7 +121,8 @@ def show_ingredients(pk):
             ingredients = recipe.get('ingredients', [])
             break
 
-    return render_template('ingredient.html', ingredients=ingredients)
+    return render_template('ingredient.html', ingredients=ingredients, total_recipes=total_recipes)
+
 
 
 # Route to handle loading more recipes
