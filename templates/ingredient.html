@@ -32,7 +32,7 @@
     <header>
         <h1 id="logo">BakeMate</h1>
         <p class="header-text">You can make {{ total_recipes }} recipes</p>
-        <form action="{{ url_for('search', query='') }}" method="GET">
+        <form action="{{ url_for('search', query='') }}" method="GET" class="form-bar">
             <div class="search-bar">
                 <input type="text" name="query" id="searchInput" placeholder="Search for recipes...">
                 <button type="submit" id="searchButton"><i class="fas fa-search"></i></button>
