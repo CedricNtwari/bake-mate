@@ -28,21 +28,18 @@ def search_cake_recipes(api_key, query='cake', page=1):
     - tuple or None: A tuple containing a list of dictionaries representing the recipes and the total number of recipes,
     or None if the request fails.
     """
-    # Define parameters for the API request
     params = {
         'page': page,
         'query': query,
     }
-    # Define headers for the API request
     headers = {
         'Authorization': f'Token {api_key}',
     }
-    # Make a GET request to the Food2Fork API
     try:
         response = requests.get(
-            FOOD2FORK_API_URL,  # API endpoint URL
-            params=params,  # Pass the parameters
-            headers=headers  # Pass the headers
+            FOOD2FORK_API_URL,
+            params=params,
+            headers=headers
         )
 
         # Check if the response status code is 200 (OK)
@@ -84,18 +81,11 @@ def index():
     with the fetched recipes, or displays an error message
     if fetching recipes fails.
     """
-    # Call the function to search for cake recipes using the Food2Fork API
     cake_recipes, total_recipes = search_cake_recipes(api_key)
-    # Set a default value for 'page' if it is None
     page = 1
 
-    # Check if cake recipes were successfully retrieved
     if cake_recipes:
-        # Determine if there are more recipes by checking
-        # the length of the list
         has_more_recipes = len(cake_recipes) > 0
-        # Render the 'index.html' template with recipe data
-        # and pagination information
         return render_template(
             'index.html',
             recipes=cake_recipes,
@@ -125,8 +115,11 @@ def show_ingredients(pk):
 
 
 # Route to handle search
-@app.route('/search/<query>', defaults={'query': ''})
-def search(query):
+@app.route('/search')
+def search():
+    # Get the search query from the request parameters
+    query = request.args.get('query', '')
+
     # Validate user input (allow only letters and spaces)
     if not query.replace(" ", "").isalpha():
         return render_template('invalid_input.html', query=query)
@@ -138,14 +131,15 @@ def search(query):
     if cake_recipes:
         has_more_recipes = len(cake_recipes) > 0
         return render_template(
-            'index.html',
+            'search_results.html',
             recipes=cake_recipes,
             page=page,
             has_more_recipes=has_more_recipes,
-            total_recipes=total_recipes
+            total_recipes=total_recipes,
+            query=query  # Pass the query to be displayed in the template
         )
     else:
-        return render_template('invalid_input.html', query=query)
+        return render_template('no_results.html', query=query)
 
 
 
