@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- Meta tags for search engine optimization -->
     <meta name="description"
-    content="BakeMate is your culinary assistant, seamlessly connecting to a recipe API with ease to deliver a customised experience. It leverages the Flask web framework to provide a smooth user interface for exploring and managing recipes.">
+        content="BakeMate is your culinary assistant, seamlessly connecting to a recipe API with ease to deliver a customised experience. It leverages the Flask web framework to provide a smooth user interface for exploring and managing recipes.">
 
     <meta name="keywords"
-    content="BakeMate, culinary assistant, recipe management, baking, home baking, ingredient adjustment, precision baking, baking projects">
+        content="BakeMate, culinary assistant, recipe management, baking, home baking, ingredient adjustment, precision baking, baking projects">
 
     <!-- Favicon & Tab Icon Links -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon_io/apple-touch-icon.png') }}">
-<link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon_io/favicon-32x32.png') }}">
-<link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon_io/favicon-16x16.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="{{ url_for('static', filename='favicon_io/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="{{ url_for('static', filename='favicon_io/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16"
+        href="{{ url_for('static', filename='favicon_io/favicon-16x16.png') }}">
 
 
     <!-- Link CSS Stylesheets -->
@@ -23,19 +27,38 @@
 
     <title>Cake Recipes</title>
 </head>
+
 <body>
     <header>
         <h1 id="logo">BakeMate</h1>
-        <p>You can make {{ total_recipes }} recipes</p>
+        <p class="header-text">You can make {{ total_recipes }} recipes</p>
+        <form action="{{ url_for('search', query='') }}" method="GET">
+            <div class="search-bar">
+                <input type="text" name="query" id="searchInput" placeholder="Search for recipes...">
+                <button type="submit" id="searchButton"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+        {% if recipes %}
+        <h2>Search Results for "{{ query }}"</h2>
+        <!-- Display the recipes here -->
+        <!-- Use a loop to iterate through the recipes -->
+        <ul>
+            {% for recipe in recipes %}
+            <li>{{ recipe.title }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No results found for "{{ query }}"</p>
+        {% endif %}
     </header>
     <main>
-    <h1>{{ total_recipes }} Cake Recipes</h1>
-    <!-- Display current page and add a button to return to the previous page -->
-    {% if page > 1 %}
+        <h2>{{ total_recipes }} Cake Recipes</h2>
+        <!-- Display current page and add a button to return to the previous page -->
+        {% if page > 1 %}
         <p>Page {{ page }} <a href="/load-more?page={{ page - 1 }}">(Previous Page)</a></p>
-    {% endif %}
-    <ul class="recipe-container">
-        {% for recipe in recipes %}
+        {% endif %}
+        <ul class="recipe-container">
+            {% for recipe in recipes %}
             <li class="recipe-card">
                 <div class="recipe-details">
                     <div class="recipe-image">
@@ -43,26 +66,27 @@
                     </div>
                     <h2>{{ recipe['title'] }}</h2>
                     <p>Publisher: {{ recipe['publisher'] }}</p>
-                    <p>Source URL: <a href="{{ recipe['source_url'] }}" target="_blank">{{ recipe['source_url'] }}</a></p>
+                    <p>Source URL: <a href="{{ recipe['source_url'] }}" target="_blank">{{ recipe['source_url'] }}</a>
+                    </p>
                     <p>Ingredients:</p>
                     <!-- Add a button to redirect to the ingredient.html page -->
                     <a href="/ingredient/{{ recipe['pk'] }}" class="ingredient-btn">View Ingredients</a>
                 </div>
             </li>
-        {% endfor %}
-    </ul>
-    <!-- Add a button to load more recipes -->
-    <form method="GET" action="/load-more">
-        <input type="hidden" name="page" value="{{ page + 1 }}">
-        <button class="load-more-btn" type="submit" {% if not has_more_recipes %}disabled{% endif %}>
-            Load More Recipes (Page {{ page + 1 }})
-        </button>
-    </form>
-    <button class="scroll-up-btn" onclick="scrollToTop()">↑</button>
-</main>
+            {% endfor %}
+        </ul>
+        <!-- Add a button to load more recipes -->
+        <form method="GET" action="/load-more">
+            <input type="hidden" name="page" value="{{ page + 1 }}">
+            <button class="load-more-btn" type="submit" {% if not has_more_recipes %}disabled{% endif %}>
+                Load More Recipes (Page {{ page + 1 }})
+            </button>
+        </form>
+        <button class="scroll-up-btn" onclick="scrollToTop()">↑</button>
+    </main>
     <footer>
         <p>Follow us on</p>
-         <ul id="social-network">
+        <ul id="social-network">
             <li>
                 <a href="https://www.facebook.com/" target="_blank" rel="noopener"
                     aria-label="Visit our Facebook (opens in new tab)"><i class="fab fa-facebook"></i></a>
@@ -78,7 +102,7 @@
             <li>
                 <a href="https://www.instagram.com/" target="_blank" rel="noopener"
                     aria-label="Visit our Instagram (opens in new tab)"><i class="fab fa-instagram"></i></a>
-                </li>
+            </li>
         </ul>
         <div class="contact-information">
             <p><i class="fas fa-phone"></i> +356 2124 9200</p>
@@ -86,10 +110,11 @@
         </div>
         <p id="author">Built and designed by Jean Cédric Ntwari</p>
     </footer>
-     <!-- Link JavaScript file -->
-     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <!-- Link JavaScript file -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
-     <!-- Font awesome kit -->
-     <script src="https://kit.fontawesome.com/c0241e8eb0.js" crossorigin="anonymous"></script>
+    <!-- Font awesome kit -->
+    <script src="https://kit.fontawesome.com/c0241e8eb0.js" crossorigin="anonymous"></script>
 </body>
+
 </html>

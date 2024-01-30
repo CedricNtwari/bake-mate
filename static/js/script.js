@@ -110,4 +110,15 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
     
+    // Get the input field and search button
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.getElementById('searchButton');
+
+    // Add event listener for "Enter" key press
+    searchInput.addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            // Simulate a click on the search button
+            searchButton.click();
+        }
+    });
 });

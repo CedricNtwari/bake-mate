@@ -124,6 +124,30 @@ def show_ingredients(pk):
     return render_template('ingredient.html', ingredients=ingredients, total_recipes=total_recipes)
 
 
+# Route to handle search
+@app.route('/search/<query>', defaults={'query': ''})
+def search(query):
+    # Validate user input (allow only letters and spaces)
+    if not query.replace(" ", "").isalpha():
+        return render_template('invalid_input.html', query=query)
+
+    # Call the function to search for recipes using the Food2Fork API
+    cake_recipes, total_recipes = search_cake_recipes(api_key, query=query)
+    page = 1
+
+    if cake_recipes:
+        has_more_recipes = len(cake_recipes) > 0
+        return render_template(
+            'index.html',
+            recipes=cake_recipes,
+            page=page,
+            has_more_recipes=has_more_recipes,
+            total_recipes=total_recipes
+        )
+    else:
+        return render_template('invalid_input.html', query=query)
+
+
 
 # Route to handle loading more recipes
 @app.route('/load-more', methods=['GET'])
