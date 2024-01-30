@@ -38,19 +38,6 @@
                 <button type="submit" id="searchButton"><i class="fas fa-search"></i></button>
                 </d iv>
         </form>
-        <!-- Display the search results -->
-        {% if recipes %}
-        <h2>Search Results for "{{ query }}"</h2>
-        <!-- Display the recipes here -->
-        <!-- Use a loop to iterate through the recipes -->
-        <ul>
-            {% for recipe in recipes %}
-            <li>{{ recipe.title }}</li>
-            {% endfor %}
-        </ul>
-        {% else %}
-        <p>No results found for "{{ query }}"</p>
-        {% endif %}
     </header>
     <h2>404 Not Found</h2>
     <p>The requested page could not be found.</p>
