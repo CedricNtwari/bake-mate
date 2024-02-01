@@ -143,10 +143,19 @@ a {
     padding: 9px 12px;
     white-space: nowrap;
     border: none;
-    letter-spacing: 3px;
+    letter-spacing: 1px;
     font-size: 18px;
     cursor: pointer;
     width: auto;
+    transition: background-color 0.3s;
+}
+
+.load-more-btn:hover {
+    background-color: #45a049;
+}
+
+.load-more-btn:active {
+    background-color: #3e8e41;
 }
 
 footer {
