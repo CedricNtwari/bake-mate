@@ -27,7 +27,7 @@ body {
 header {
     background-color: #d8456b;
     color: #fff;
-    height: 120px;
+    height: 140px;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -45,10 +45,16 @@ main {
 }
 
 h1 {
-    line-height: 17px;
-    font-weight: 600;
-    font-size: 24px;
     letter-spacing: -0.64px;
+    line-height: 1.25em;
+    font-weight: 400;
+}
+
+h2 {
+    color: #4a4a4a;
+    line-height: 1.25em;
+    margin-bottom: 0.75rem;
+    font-weight: 400;
 }
 
 a {
