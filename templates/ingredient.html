@@ -42,16 +42,15 @@
     <main>
         <h1>Ingredients:</h1>
         <ul>
-            {% for ingredient in ingredients %}
-            <li class="ingredient-item" data-ingredient-id="{{ loop.index0 }}">
-                <span class="ingredient-quantity-name">{{ ingredient }}</span>
-                <button class="edit-btn"><i class="fas fa-edit"></i></button>
-                <div class="edit-panel">
-                    <input type="number" class="edit-input" step="0.1" placeholder="Enter new quantity">
-                    <button class="update-btn">Adjust</button>
-                </div>
-            </li>
-            {% endfor %}
+            {% if ingredients is not none %}
+            <ul>
+                {% for ingredient in ingredients %}
+                <li>{{ ingredient }}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No ingredients found for this recipe.</p>
+            {% endif %}
         </ul>
         <button class="update-all-btn">Update All</button>
         <a href="/" class="back-btn">Back to Recipes</a>

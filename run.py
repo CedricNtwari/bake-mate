@@ -99,17 +99,19 @@ def index():
 
 
 
-@app.route('/ingredient/<pk>')
+@app.route('/ingredient/<int:pk>')
 def show_ingredients(pk):
     # Use the API response data directly
     recipes, total_recipes = search_cake_recipes(api_key)
     ingredients = None
 
-    # Find the recipe with the specified 'pk'
-    for recipe in recipes:
-        if str(recipe.get('pk')) == pk:
-            ingredients = recipe.get('ingredients', [])
-            break
+    # Check if recipes is not None before iterating
+    if recipes is not None:
+        # Find the recipe with the specified 'pk'
+        for recipe in recipes:
+            if recipe.get('pk') == pk:
+                ingredients = recipe.get('ingredients', [])
+                break
 
     return render_template('ingredient.html', ingredients=ingredients, total_recipes=total_recipes)
 
@@ -139,7 +141,7 @@ def search():
             query=query  # Pass the query to be displayed in the template
         )
     else:
-        return render_template('no_results.html', query=query)
+        return render_template('invalid_input.html', query=query)
 
 
 
