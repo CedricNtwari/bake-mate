@@ -185,8 +185,8 @@ ul#social-network li {
     margin-right: 10px;
 }
 
-ul#social-network li  {
-   color: white;
+ul#social-network a  {
+   color: black;
 }
 
 .contact-information {
