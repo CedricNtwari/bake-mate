@@ -52,13 +52,16 @@
                     <div class="recipe-image">
                         <img src="{{ recipe['featured_image'] }}" alt="{{ recipe['title'] }}">
                     </div>
-                    <h2>{{ recipe['title'] }}</h2>
+                    <h4>{{ recipe['title'] }}</h4>
                     <p>Publisher: {{ recipe['publisher'] }}</p>
-                    <p>Source URL: <a href="{{ recipe['source_url'] }}" target="_blank">{{ recipe['source_url'] }}</a>
+                    <p>Source URL: <a href="{{ recipe['source_url'] }}" target="_blank">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
                     </p>
                     <p>Ingredients:</p>
-                    <!-- Add a button to redirect to the ingredient.html page -->
-                    <a href="/ingredient/{{ recipe['pk'] }}" class="ingredient-btn load-more-btn">View Ingredients</a>
+                    <a href="/ingredient/{{ recipe['pk'] }}" class="ingredient-btn">
+                        View Ingredients <i class="fas fa-chevron-right"></i>
+                    </a>
                 </div>
             </li>
             {% endfor %}
@@ -85,6 +88,8 @@
                     <p><i class="fas fa-phone"></i> +356 2124 9200</p>
                     <p><i class="far fa-envelope"></i> ntwaricedric@gmail.com</p>
                 </div>
+            </div>
+            <div class="column">
                 <p>Follow us on</p>
                 <ul id="social-network">
                     <li>
@@ -104,7 +109,7 @@
                             aria-label="Visit our Instagram (opens in new tab)"><i class="fab fa-instagram"></i></a>
                     </li>
                 </ul>
-            </div>
+      </div></div>
         </div>
     </footer>
     <section class="footer-bottom">
