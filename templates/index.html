@@ -49,28 +49,29 @@
             {% for recipe in recipes %}
             <li class="recipe-card">
                 <div class="recipe-details">
-                    <div class="recipe-image">
-                        <img src="{{ recipe['featured_image'] }}" alt="{{ recipe['title'] }}">
+                    <div class="recipe-content">
+                        <div class="recipe-image">
+                            <img src="{{ recipe['featured_image'] }}" alt="{{ recipe['title'] }}">
+                        </div>
+                        <div class="text-details">
+                            <h4>{{ recipe['title'] }}</h4>
+                            <p>Explore more: <a href="{{ recipe['source_url'] }}" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </p>
+                            <p>View Ingredients: <a href="/ingredient/{{ recipe['pk'] }}" class="ingredient-btn"><i class="fas fa-eye"></i></a></p>
+                        </div>
                     </div>
-                    <h4>{{ recipe['title'] }}</h4>
-                    <p>Publisher: {{ recipe['publisher'] }}</p>
-                    <p>Source URL: <a href="{{ recipe['source_url'] }}" target="_blank">
-                            <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </p>
-                    <p>Ingredients:</p>
-                    <a href="/ingredient/{{ recipe['pk'] }}" class="ingredient-btn">
-                        View Ingredients <i class="fas fa-chevron-right"></i>
-                    </a>
                 </div>
             </li>
             {% endfor %}
         </ul>
+        
         <!-- Add a button to load more recipes -->
-        <form method="GET" action="/load-more">
+        <form method="GET" action="/load-more" class="form-load-more">
             <input type="hidden" name="page" value="{{ page + 1 }}">
             <button class="load-more-btn" type="submit" {% if not has_more_recipes %}disabled{% endif %}>
-                Load More Recipes (Page {{ page + 1 }})
+                Load More Recipes
             </button>
         </form>
         <button class="scroll-up-btn" onclick="scrollToTop()">↑</button>
