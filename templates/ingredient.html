@@ -45,23 +45,23 @@
         </a>
         <h1 class="add-margin">Ingredients:</h1>
         <ul class="ingredient-list">
-            {% if ingredients is not none %}
-            {% for ingredient in ingredients %}
-            <li class="ingredient-item">
-                <span class="ingredient-quantity-name">
-                    {{ ingredient }}
-                </span>
-                <button class="edit-btn"><i class="fas fa-edit"></i></button>
-                <div class="edit-panel">
-                    <input type="text" class="edit-input" id="newAmount{{ loop.index }}" placeholder="New amount">
-                    <button class="update-btn">Update</button>
-                </div>
-            </li>
-            {% endfor %}
+            {% if ingredients %}
+                {% for ingredient in ingredients %}
+                    <li class="ingredient-item">
+                        <span class="ingredient-quantity-name">
+                            {{ ingredient }}
+                        </span>
+                        <button class="edit-btn"><i class="fas fa-edit"></i></button>
+                        <div class="edit-panel">
+                            <input type="text" class="edit-input" id="newAmount{{ loop.index }}" placeholder="New amount">
+                            <button class="update-btn">Update</button>
+                        </div>
+                    </li>
+                {% endfor %}
             {% else %}
-            <p class="add-margin">No ingredients found for this recipe.</p>
+                <p class="add-margin">No ingredients found for this recipe.</p>
             {% endif %}
-        </ul>
+        </ul>                        
         <button class="update-all-btn load-more-btn">Update All</button>
         <button class="scroll-up-btn" onclick="scrollToTop()">↑</button>
     </main>    

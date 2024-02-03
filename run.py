@@ -1,11 +1,10 @@
-from flask import Flask, render_template, request
-# Package to load environment variables from a .env file
-# (https://pypi.org/project/python-dotenv/)
+from flask import Flask, render_template, request, jsonify
+from werkzeug.utils import escape
 from dotenv import load_dotenv
 import os
 import requests
 
-load_dotenv()  # take environment variables from .env.
+load_dotenv()
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -21,11 +20,12 @@ def search_cake_recipes(api_key, query='cake', page=1):
 
     Parameters:
     - api_key (str): The food2fork.ca API key.
-    - query (str): The query term for recipe search (default is 'cake').
+    - query (str): The query term for recipe search (default is 'cake').§
     - page (int): The page number for pagination (default is 1).
 
     Returns:
-    - tuple or None: A tuple containing a list of dictionaries representing the recipes and the total number of recipes,
+    - tuple or None: A tuple containing a list of dictionaries representing
+    the recipes and the total number of recipes,
     or None if the request fails.
     """
     params = {
@@ -55,8 +55,7 @@ def search_cake_recipes(api_key, query='cake', page=1):
 
             # Extract the list of recipes from the response data
             recipes = recipes_data.get('results', [])
-            total_recipes = recipes_data.get('count', 0)
-            
+            total_recipes = recipes_data.get('count', 0)           
             return recipes, total_recipes
         else:
             # Print an error message if the API request was not successful
@@ -69,7 +68,6 @@ def search_cake_recipes(api_key, query='cake', page=1):
     except Exception as e:
         print(f"An error occurred: {e}")
         return None
-
 
 
 @app.route('/')
@@ -98,7 +96,6 @@ def index():
         return "Error fetching recipes."
 
 
-
 @app.route('/ingredient/<int:pk>')
 def show_ingredients(pk):
     # Use the API response data directly
@@ -109,10 +106,12 @@ def show_ingredients(pk):
     if recipes is not None:
         # Find the recipe with the specified 'pk'
         for recipe in recipes:
+            print(f"Recipe PK: {recipe.get('pk')}")
             if recipe.get('pk') == pk:
                 ingredients = recipe.get('ingredients', [])
                 break
 
+    print(f"Selected Ingredients: {ingredients}")
     return render_template('ingredient.html', ingredients=ingredients, total_recipes=total_recipes)
 
 
@@ -123,8 +122,8 @@ def search():
     query = request.args.get('query', '')
 
     # Validate user input (allow only letters and spaces)
-    if not query.replace(" ", "").isalpha():
-        return render_template('invalid_input.html', query=query)
+    if not query.replace(" ", "").isalpha() or not query.strip():
+        return render_template('invalid_input.html', query=escape(query))
 
     # Call the function to search for recipes using the Food2Fork API
     cake_recipes, total_recipes = search_cake_recipes(api_key, query=query)
@@ -141,20 +140,27 @@ def search():
             query=query  # Pass the query to be displayed in the template
         )
     else:
-        return render_template('invalid_input.html', query=query)
-
+        return render_template('invalid_input.html', query=escape(query))
 
 
 # Route to handle loading more recipes
 @app.route('/load-more', methods=['GET'])
 def load_more():
-    # Get the 'page' parameter from the form submission
     page = int(request.args.get('page', 1))
     cake_recipes = search_cake_recipes(api_key, page=page)
 
     if cake_recipes:
-        return render_template('index.html', recipes=cake_recipes, page=page)
+        if len(cake_recipes) > 0:
+            return render_template(
+                'index.html',
+                recipes=cake_recipes,
+                page=page)
+
+        else:
+            # Return a response indicating no more recipes to load
+            return jsonify({'message': 'No more recipes to load'})
     else:
+        # Return an error message if fetching more recipes fails
         return "Error fetching more recipes."
 
 
