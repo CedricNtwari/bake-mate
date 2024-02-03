@@ -50,7 +50,8 @@ h1 {
     font-weight: 400;
 }
 
-h2, h4 {
+h2,
+h4 {
     color: #4a4a4a;
     line-height: 1.25em;
     margin-bottom: 0.75rem;
@@ -157,25 +158,25 @@ a {
 
 .text-details:hover {
     color: #4a4a4a;
- }
+}
 
 .text-details p {
-   padding: 5px 0;
+    padding: 5px 0;
 }
 
 .text-details i {
     cursor: pointer;
- }
+}
 
 .text-details a {
     color: rgba(79, 80, 90, 0.6);
- }
+}
 
- .text-details a:hover {
+.text-details a:hover {
     color: #4a4a4a;
- }
+}
 
- .main {
+.main {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -195,6 +196,21 @@ a {
     margin-bottom: 8px;
     padding: 8px;
     list-style: none;
+    margin-left: 15px;
+    margin-top: 4px;
+    color: #4a4a4a;
+    font-size: 15px;
+    line-height: 16px;
+}
+
+.info-text {
+    margin-bottom: 8px;
+    padding: 8px;
+    list-style: none;
+    margin-left: 15px;
+    margin-top: 4px;
+    color: red;
+    font-size: 15px;
 }
 
 .edit-panel {
@@ -215,12 +231,18 @@ a {
 
 .edit-btn {
     margin-left: 8px;
+    cursor: pointer;
+}
+
+.edit-btn[disabled] {
+    cursor: not-allowed;
 }
 
 /* Add styling for the check icon */
 .ingredient-item i.fas.fa-check {
     margin-left: auto;
-    color: green; /* Change the color as needed */
+    color: green;
+    /* Change the color as needed */
 }
 
 .load-more-btn {
@@ -278,8 +300,8 @@ ul#social-network li {
     margin-right: 10px;
 }
 
-ul#social-network a  {
-   color: black;
+ul#social-network a {
+    color: black;
 }
 
 ul#social-network a:hover {
@@ -298,17 +320,22 @@ ul#social-network a:hover {
     padding: 10px;
 }
 
-.add-margin{
+.add-margin {
     margin-bottom: 20px;
- }
+}
 
 .update-all-btn {
     display: none;
 }
 
-ul:has(li.ingredient-item) + .update-all-btn {
+ul:has(li.ingredient-item)+.update-all-btn {
     display: inline-block;
     margin-top: 20px;
+}
+
+.updated-amount {
+    color: green;
+    font-weight: bold;
 }
 
 /* Media query: large and landscape phones (576px and up) */
@@ -327,13 +354,14 @@ ul:has(li.ingredient-item) + .update-all-btn {
 
 /* Media query: laptop and larger (992px and up) */
 @media screen and (min-width: 992px) {
-     .recipe-container{
+    .recipe-container {
         display: flex;
         width: fit-content;
         flex-wrap: wrap;
     }
+
     .recipe-card {
-        width: calc(33.33% - 20px); 
+        width: calc(33.33% - 20px);
         margin: 5px;
         transition: transform 0.3s ease-in-out;
     }

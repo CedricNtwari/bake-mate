@@ -19,7 +19,6 @@ function showScrollUpButton() {
     }
 }
 
-
 document.addEventListener('DOMContentLoaded', function () {
     const editedIngredientIds = []; // List to store edited ingredient IDs
 
@@ -33,6 +32,13 @@ document.addEventListener('DOMContentLoaded', function () {
             const ingredientItem = this.closest('.ingredient-item');
 
             ingredientItem.classList.toggle('edit-panel-active', editPanel.classList.contains('show-edit-panel'));
+
+            // Extract ingredient ID from the data-attribute
+            const ingredientId = ingredientItem.dataset.ingredientId;
+
+            if (editPanel.classList.contains('show-edit-panel') && !editedIngredientIds.includes(ingredientId)) {
+                editedIngredientIds.push(ingredientId);
+            }
         });
     });
 
@@ -44,8 +50,9 @@ document.addEventListener('DOMContentLoaded', function () {
             const inputField = editPanel.querySelector('.edit-input');
             const ingredientItem = this.closest('.ingredient-item');
 
-            if (inputField.value.trim() !== '') {
-                const newQuantity = inputField.value.trim();
+            const newQuantity = parseFloat(inputField.value.trim());
+
+            if (!isNaN(newQuantity) && inputField.value.trim() !== '') {
                 const quantityNameSpan = ingredientItem.querySelector('.ingredient-quantity-name');
                 const currentIngredient = quantityNameSpan.textContent;
                 const updatedIngredient = currentIngredient.replace(/\d+(\.\d+)?/, newQuantity);
@@ -55,11 +62,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (!editedIngredientIds.includes(ingredientId)) {
                     editedIngredientIds.push(ingredientId);
                 }
-
                 editPanel.classList.remove('show-edit-panel');
+                inputField.value = '';
+
+            } else {
+                alert('Please enter a valid number.');
             }
         });
     });
+
+    // Disable edit button for items without a number in the text
+    disableEditButtonsForNonNumericItems();
 
     const updateAllButton = document.querySelector('.update-all-btn');
 
@@ -69,63 +82,99 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateAllIngredients() {
         if (editedIngredientIds.length > 0) {
-            const totalEditedIngredients = editedIngredientIds.length;
+            // Calculate the average change in quantity
+            let totalChange = 0;
     
-            // Calculate the proportional adjustment factor
-            const adjustmentFactor = 1 / totalEditedIngredients;
+            // Iterate through all ingredients to calculate total change
+            const allIngredientItems = document.querySelectorAll('.ingredient-item');
+            allIngredientItems.forEach(item => {
+                const originalQuantityText = item.querySelector('.ingredient-quantity-name').textContent.trim();
+                const originalQuantity = parseFloat(originalQuantityText);
     
-            // Get the details of the edited ingredients
-            editedIngredientIds.forEach(ingredientId => {
-                const editedIngredient = document.querySelector(`[data-ingredient-id="${ingredientId}"]`);
-                const editedIngredientQuantityName = editedIngredient.querySelector('.ingredient-quantity-name');
+                if (!isNaN(originalQuantity)) {
+                    const editPanel = item.querySelector('.edit-panel');
+                    const inputField = editPanel.querySelector('.edit-input');
+                    const newQuantity = parseFloat(inputField.value.trim());
     
-                // Your logic to update each ingredient goes here
-                const originalEditedText = editedIngredientQuantityName.textContent;
-                const originalEditedQuantity = parseFloat(originalEditedText);
+                    if (!isNaN(newQuantity)) {
+                        totalChange += newQuantity - originalQuantity;
+                    }
+                }
+            });
     
-                // Check if the original quantity contains a number
-                if (!isNaN(originalEditedQuantity)) {
-                    const newEditedQuantity = originalEditedQuantity * adjustmentFactor;
-                    const updatedIngredientText = originalEditedText.replace(originalEditedQuantity, newEditedQuantity.toFixed(1));
-                    editedIngredientQuantityName.textContent = updatedIngredientText;
+            // Apply the average change proportionally to all ingredients
+            allIngredientItems.forEach(item => {
+                const quantityNameSpan = item.querySelector('.ingredient-quantity-name');
+                const originalText = quantityNameSpan.textContent.trim();
     
-                    // For example, adjust all other ingredients proportionally
-                    const otherIngredients = document.querySelectorAll('.ingredient-item:not([data-ingredient-id="' + ingredientId + '"])');
-                    otherIngredients.forEach(otherIngredient => {
-                        const otherQuantityNameSpan = otherIngredient.querySelector('.ingredient-quantity-name');
-                        const originalOtherText = otherQuantityNameSpan.textContent;
-                        const originalOtherQuantity = parseFloat(originalOtherText);
+                // Extract the unit (e.g., "tsp") from the original text
+                const unitMatch = originalText.match(/[^\d]+/);
+                const unit = unitMatch ? unitMatch[0] : '';
     
-                        // Check if the original quantity contains a number
-                        if (!isNaN(originalOtherQuantity)) {
-                            const newOtherQuantity = (originalOtherQuantity * adjustmentFactor) + 1;
-                            const updatedOtherText = originalOtherText.replace(originalOtherQuantity, newOtherQuantity.toFixed(1));
-                            otherQuantityNameSpan.textContent = updatedOtherText;
-                        }
-                    });
+                // Extract the numeric value from the original text
+                const originalValue = parseFloat(originalText);
     
-                    console.log(`Updated ingredient with ID ${ingredientId}`);
+                // Check if the original value is a valid number
+                if (!isNaN(originalValue)) {
+                    // Calculate the new quantity based on the average change
+                    const averageChange = totalChange / allIngredientItems.length;
+                    const newValue = originalValue + averageChange;
+                    const updatedIngredientText = `${newValue.toFixed(0)} ${unit}`;
+                    quantityNameSpan.innerHTML = `<span class="updated-amount">${updatedIngredientText}</span>`;
+    
+                    console.log(`Updated ingredient in ID ${item.dataset.ingredientId}`);
                 }
             });
     
             // Clear the list of edited ingredient IDs
             editedIngredientIds.length = 0;
     
-            alert('Ingredients updated successfully!');
+            // Toggle back the edit panel for each edited ingredient
+            const editedIngredientPanels = document.querySelectorAll('.ingredient-item.edit-panel-active .edit-panel');
+            editedIngredientPanels.forEach(panel => {
+                panel.classList.remove('show-edit-panel');
+            });
+    
+            // Remove the edit-panel-active class from all ingredient items
+            allIngredientItems.forEach(item => {
+                item.classList.remove('edit-panel-active');
+            });
+    
+            // Disable edit buttons for items without a number in the text
+            disableEditButtonsForNonNumericItems();
+    
+            alert('Ingredients updated will be in green!');
         } else {
             alert('No ingredients have been edited.');
         }
     }
     
+            
+
     // Get the input field and search button
     const searchInput = document.getElementById('searchInput');
     const searchButton = document.getElementById('searchButton');
 
     // Add event listener for "Enter" key press
-    searchInput.addEventListener('keyup', function(event) {
+    searchInput.addEventListener('keyup', function (event) {
         if (event.key === 'Enter') {
             // Simulate a click on the search button
             searchButton.click();
         }
     });
+
+    // Helper function to disable edit buttons for items without a number in the text
+    function disableEditButtonsForNonNumericItems() {
+        const ingredientItems = document.querySelectorAll('.ingredient-item');
+
+        ingredientItems.forEach(item => {
+            const quantityNameSpan = item.querySelector('.ingredient-quantity-name');
+            const hasNumber = /\d/.test(quantityNameSpan.textContent);
+
+            const editButton = item.querySelector('.edit-btn');
+            editButton.disabled = !hasNumber;
+        });
+    }
 });
+
+

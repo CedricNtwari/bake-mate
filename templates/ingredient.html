@@ -47,10 +47,10 @@
         <ul class="ingredient-list">
             {% if ingredients %}
                 {% for ingredient in ingredients %}
-                    <li class="ingredient-item">
-                        <div class="ingredient-quantity-name">
+                    <li class="ingredient-item" data-ingredient-id="ingredient{{ loop.index }}">
+                        <span class="ingredient-quantity-name">
                             {{ ingredient }}
-                        </div>
+                        </span>
                         <button class="edit-btn"><i class="fas fa-edit"></i></button>
                         <div class="edit-panel">
                             <input type="text" class="edit-input" id="newAmount{{ loop.index }}" placeholder="New amount">
@@ -63,8 +63,12 @@
             {% endif %}
         </ul>                        
         <button class="update-all-btn load-more-btn">Update All</button>
+        <p class="info-text">
+            <i class="fas fa-info-circle"></i>
+            Update All should proportionally adjust the quantities of all other ingredients to maintain a balanced recipe.
+        </p>        
         <button class="scroll-up-btn" onclick="scrollToTop()">↑</button>
-    </main>        
+    </main>    
     <footer>
         <div class="footer-container">
             <div class="column">
