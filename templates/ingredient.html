@@ -48,9 +48,9 @@
             {% if ingredients %}
                 {% for ingredient in ingredients %}
                     <li class="ingredient-item">
-                        <span class="ingredient-quantity-name">
+                        <div class="ingredient-quantity-name">
                             {{ ingredient }}
-                        </span>
+                        </div>
                         <button class="edit-btn"><i class="fas fa-edit"></i></button>
                         <div class="edit-panel">
                             <input type="text" class="edit-input" id="newAmount{{ loop.index }}" placeholder="New amount">
@@ -64,7 +64,7 @@
         </ul>                        
         <button class="update-all-btn load-more-btn">Update All</button>
         <button class="scroll-up-btn" onclick="scrollToTop()">↑</button>
-    </main>    
+    </main>        
     <footer>
         <div class="footer-container">
             <div class="column">

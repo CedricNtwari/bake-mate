@@ -29,6 +29,10 @@ document.addEventListener('DOMContentLoaded', function () {
         button.addEventListener('click', function () {
             const editPanel = this.nextElementSibling;
             editPanel.classList.toggle('show-edit-panel');
+
+            const ingredientItem = this.closest('.ingredient-item');
+
+            ingredientItem.classList.toggle('edit-panel-active', editPanel.classList.contains('show-edit-panel'));
         });
     });
 

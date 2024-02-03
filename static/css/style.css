@@ -188,24 +188,29 @@ a {
 
 .ingredient-item {
     display: flex;
+    position: relative;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     border: 1px solid #ccc;
     margin-bottom: 8px;
     padding: 8px;
     list-style: none;
 }
 
-.ingredient-quantity-name {
-    flex: 1;
-}
-
 .edit-panel {
     display: none;
 }
 
-.show-edit-panel {
+.edit-panel.show-edit-panel {
     display: block;
+    position: absolute;
+    top: 55%;
+    left: 10px;
+    width: 100%;
+}
+
+.ingredient-item.edit-panel-active {
+    padding-bottom: 30px;
 }
 
 .edit-btn {
