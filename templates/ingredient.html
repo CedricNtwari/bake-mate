@@ -34,13 +34,16 @@
         <p class="header-text">You can make {{ total_recipes }} recipes</p>
         <form action="{{ url_for('search', query='') }}" method="GET" class="form-bar">
             <div class="search-bar">
-                <input type="text" name="query" id="searchInput" placeholder="Search for recipes...">
+                <input type="text" name="query" id="searchInput" placeholder="Search for cake recipes only...">
                 <button type="submit" id="searchButton"><i class="fas fa-search"></i></button>
             </div>
         </form>
     </header>
     <main>
-        <h1>Ingredients:</h1>
+        <a href="/" class="text-details">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+        <h1 class="add-margin">Ingredients:</h1>
         <ul>
             {% if ingredients is not none %}
             {% for ingredient in ingredients %}
@@ -56,12 +59,10 @@
             </li>
             {% endfor %}
             {% else %}
-            <p>No ingredients found for this recipe.</p>
+            <p class="add-margin">No ingredients found for this recipe.</p>
             {% endif %}
-
         </ul>
-        <button class="update-all-btn load-more-btn" class="load-more-btn">Update All</button>
-        <a href="/" class="back-btn load-more-btn">Back to Recipes</a>
+        <button class="update-all-btn load-more-btn">Update All</button>
         <button class="scroll-up-btn" onclick="scrollToTop()">↑</button>
     </main>
     <footer>

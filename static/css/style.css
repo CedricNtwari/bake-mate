@@ -176,6 +176,10 @@ a {
     color: #4a4a4a;
  }
 
+ .ingredient-item {
+    list-style: none;
+ }
+
 .edit-panel {
     display: none;
 }
@@ -262,6 +266,15 @@ ul#social-network a:hover {
 .add-margin{
     margin-bottom: 20px;
  }
+
+.update-all-btn {
+    display: none;
+}
+
+ul:has(li.ingredient-item) + .update-all-btn {
+    display: inline-block;
+    margin-top: 20px;
+}
 
 /* Media query: large and landscape phones (576px and up) */
 @media screen and (min-width: 576px) {}
