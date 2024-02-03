@@ -176,9 +176,30 @@ a {
     color: #4a4a4a;
  }
 
- .ingredient-item {
+ .main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ingredient-list {
     list-style: none;
- }
+    padding: 0;
+}
+
+.ingredient-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ccc;
+    margin-bottom: 8px;
+    padding: 8px;
+    list-style: none;
+}
+
+.ingredient-quantity-name {
+    flex: 1;
+}
 
 .edit-panel {
     display: none;
@@ -186,6 +207,16 @@ a {
 
 .show-edit-panel {
     display: block;
+}
+
+.edit-btn {
+    margin-left: 8px;
+}
+
+/* Add styling for the check icon */
+.ingredient-item i.fas.fa-check {
+    margin-left: auto;
+    color: green; /* Change the color as needed */
 }
 
 .load-more-btn {

@@ -39,12 +39,12 @@
             </div>
         </form>
     </header>
-    <main>
+    <main class="main">
         <a href="/" class="text-details">
             <i class="fas fa-arrow-left"></i> Back to Home
         </a>
         <h1 class="add-margin">Ingredients:</h1>
-        <ul>
+        <ul class="ingredient-list">
             {% if ingredients is not none %}
             {% for ingredient in ingredients %}
             <li class="ingredient-item">
@@ -64,7 +64,7 @@
         </ul>
         <button class="update-all-btn load-more-btn">Update All</button>
         <button class="scroll-up-btn" onclick="scrollToTop()">↑</button>
-    </main>
+    </main>    
     <footer>
         <div class="footer-container">
             <div class="column">
