@@ -259,6 +259,10 @@ ul#social-network a:hover {
     padding: 10px;
 }
 
+.add-margin{
+    margin-bottom: 20px;
+ }
+
 /* Media query: large and landscape phones (576px and up) */
 @media screen and (min-width: 576px) {}
 
