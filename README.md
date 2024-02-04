@@ -6,7 +6,7 @@ It leverages the Flask web framework to provide a smooth user interface for expl
 
 ![BakeMate Platform](/images/Screenshot.png)
 
-### Inspiration
+## Inspiration
 
 Inspired by a personal challenge, this app is a testament to the everyday struggle of home bakers. The idea came from my wife, who often had to rely on a little bit of speculation. Many recipes describe ingredients in a way that doesn’t always align with what she had in her cupboard. 
 
@@ -31,12 +31,34 @@ BakeMate was born out of a desire to simplify this process, offering a solution 
 8. **Responsive Design:** The app is designed to be responsive, ensuring a good user experience on different screen sizes.
 
 
-### Functionality
+## Functionality
 
 It facilitates ingredient substitution, allowing you to easily change quantities to match what you have available. 
 For instance, if a recipe calls for 250g of an ingredient but you have 100g on hand, BakeMate guides you through the perfect ingredient adjustment for your baking projects.
 
-### Credits
+## Environment Setup
+
+The application is built using the Flask web framework, making use of Python for server-side logic. To run the application locally, follow these steps:
+
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/your-username/your-repository.git
+
+2. **Navigate to the Project Directory:** cd your-repository
+
+3. **Install Dependencies:** pip install -r requirements.txt
+
+4. **Set up Environment Variables:** 
+    - Create a .env file in the project root.
+    - Add your Food2Fork API key to the .env file: API_KEY=your_food2fork_api_key
+
+5. **Run the Application:** python run.py
+
+6. **Access the Application:** Open your web browser and navigate to http://127.0.0.1:5000/
+
+    - This setup assumes you have Python and pip installed on your system. Make sure to replace your-username and your-repository with your actual GitHub username and repository name.
+
+## Credits
 
 - **Food2fork API**: Acknowledgment to Food2fork API (https://food2fork.ca/#Search-Recipes) for their comprehensive food-related API that enhances the recipe retrieval and exploration experience in BakeMate.
 
