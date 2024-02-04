@@ -43,7 +43,10 @@
         <h2>{{ total_recipes }} Cake Recipes</h2>
         <!-- Display current page and add a button to return to the previous page -->
         {% if page > 1 %}
-        <p>Page {{ page }} <a href="/load-more?page={{ page - 1 }}">(Previous Page)</a></p>
+        <a href="/" class="back-page">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+        <p class="page">Page {{ page }}</p>
         {% endif %}
         <ul class="recipe-container">
             {% for recipe in recipes %}

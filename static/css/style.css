@@ -156,6 +156,20 @@ a {
     line-height: 16px;
 }
 
+.back-page {
+    font-size: 13px;
+    line-height: 16px;
+    color: rgba(79, 80, 90, 0.6);
+}
+
+.back-page:hover {
+    color: #4a4a4a;
+}
+
+.page{
+    padding-top: 15px;
+}
+
 .text-details:hover {
     color: #4a4a4a;
 }
@@ -267,6 +281,11 @@ a {
 .load-more-btn:active {
     background-color: #3e8e41;
 }
+
+.load-more-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 
 .form-load-more {
     text-align: center;
