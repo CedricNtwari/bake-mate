@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect
 from werkzeug.utils import escape
 from dotenv import load_dotenv
 import os
@@ -146,22 +146,32 @@ def search():
 # Route to handle loading more recipes
 @app.route('/load-more', methods=['GET'])
 def load_more():
-    page = int(request.args.get('page', 1))
-    cake_recipes = search_cake_recipes(api_key, page=page)
+    try:
+        page = int(request.args.get('page', 1))
+        cake_recipes, total_recipes = search_cake_recipes(api_key, page=page)
 
-    if cake_recipes:
-        if len(cake_recipes) > 0:
-            return render_template(
-                'index.html',
-                recipes=cake_recipes,
-                page=page)
+        if cake_recipes:
+            if len(cake_recipes) > 0:
+                # Check if there are more recipes beyond the current page
+                has_more_recipes = total_recipes > page
 
-        else:
-            # Return a response indicating no more recipes to load
-            return jsonify({'message': 'No more recipes to load'})
-    else:
-        # Return an error message if fetching more recipes fails
-        return "Error fetching more recipes."
+                # Update the page number for the next load
+                next_page = page + 1
+                return render_template(
+                    'index.html',
+                    recipes=cake_recipes,
+                    page=next_page,
+                    has_more_recipes=has_more_recipes
+                )
+            else:
+                # Return a response indicating no more recipes to load
+                return jsonify({'message': 'No more recipes to load'})
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        # Redirect the user to the previous page with an error message
+        prev_page = max(1, page - 1)
+        return redirect(f'/load-more?page={prev_page}&error=true')
 
 
 # Custom 404 error handler

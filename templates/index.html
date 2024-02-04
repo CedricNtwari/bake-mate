@@ -70,12 +70,16 @@
             </li>
             {% endfor %}
         </ul>
-
+        <!-- Add a button to load more recipes -->
         <!-- Add a button to load more recipes -->
         <form method="GET" action="/load-more" class="form-load-more">
-            <input type="hidden" name="page" value="{{ page + 1 }}">
-            <button class="load-more-btn" type="submit" {% if not has_more_recipes %}disabled{% endif %}>
+            <input type="hidden" name="page" value="{{ page }}">
+            <button class="load-more-btn" type="submit" {% if not has_more_recipes or page >= 11 or error %}disabled{% endif %}>
+                {% if error %}
+                Error fetching more recipes. Check server logs for details.
+                {% else %}
                 Load More Recipes
+                {% endif %}
             </button>
         </form>
         <button class="scroll-up-btn" onclick="scrollToTop()">↑</button>
